@@ -1,16 +1,15 @@
-enum Role {
-  ADMIN,
-  READ_ONLY,
-  AUTHOR,
+function combine(input1: number | string, input2: number | string) {
+  let result;
+  if (typeof input1 === "number" && typeof input2 === "number") {
+    result = input1 + input2;
+  } else {
+    result = input1.toString() + input2.toString();
+  }
+  return result;
 }
 
-const person2 = {
-  name: "ono5",
-  age: 34,
-  hobbies: ["Programming", "Movies"],
-  role: Role.ADMIN,
-};
+const combinedAges = combine(30, 26);
+console.log(combinedAges);
 
-if (person2.role == Role.ADMIN) {
-  console.log("ADMIN USER");
-}
+const combinedNames = combine("Max", "Anna");
+console.log(combinedNames);
