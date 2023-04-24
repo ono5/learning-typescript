@@ -8,7 +8,12 @@
 // };
 
 // best practice
-const person = {
+const person: {
+  name: string;
+  age: number;
+  hobbies: string[];
+  role: [number, string];
+} = {
   name: "ono5",
   age: 34,
   hobbies: ["Sports", "Cooking"],
@@ -16,6 +21,10 @@ const person = {
 };
 
 person.role.push("admin");
+// NG
+// person.role[1] = 10;
+// OK
+// person.role = [0, "admin"];
 
 let favoriteActivities: string[];
 favoriteActivities = ["Sports"];
