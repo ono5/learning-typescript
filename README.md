@@ -6,6 +6,13 @@
 tsc using-ts.ts
 ```
 
+## Comple2
+
+```bash
+tsc --init
+tsc -w
+```
+
 ## Setup
 
 ```bash
