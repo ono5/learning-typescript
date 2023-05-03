@@ -1,59 +1,84 @@
-// interfaceはオブジェクトがどんな形であるか定義するためのもの
-// type AddFn = (a: number, b: number) => number;
-interface AddFn {
-  (a: number, b: number): number;
-}
-let add: AddFn;
-add = (n1: number, n2: number) => {
-  return n1 + n2;
+// 交差型
+type Admin = {
+  name: string;
+  privileges: string[];
+};
+type Employee = {
+  name: string;
+  startDate: Date;
+};
+type ElevatedEmployee = Admin & Employee;
+// interface Admin {
+//   name: string;
+//   privileges: string[];
+// }
+// interface Employee {
+//   name: string;
+//   startDate: Date;
+// }
+// interface ElevatedEmployee extends Admin, Employee {}
+
+const e1: ElevatedEmployee = {
+  name: "Max",
+  privileges: ["create-server"],
+  startDate: new Date(),
 };
 
-interface Named {
-  readonly name?: string;
-  outputName?: string;
-}
+type Combinable = string | number;
+type Numeric = number | boolean;
+type Universal = Combinable & Numeric;
 
-interface Greetable extends Named {
-  greet(phrase: string): void;
-}
-
-class Person implements Greetable {
-  name?: string;
-  age = 30;
-
-  constructor(n?: string) {
-    if (n) {
-      this.name = n;
-    }
-    this.name = n;
+// Type Gurad
+function add2(a: Combinable, b: Combinable) {
+  if (typeof a === "string" || typeof b === "string") {
+    return a.toString() + b.toString();
   }
+  return a + b;
+}
 
-  greet(phrase: string) {
-    if (this.name) {
-      console.log(phrase);
-    }
-    console.log(phrase + " " + this.name);
+type UnknownEmployee = Employee | Admin;
+function printEmployeeInformation(emp: UnknownEmployee) {
+  console.log(emp.name);
+  if ("privileges" in emp) {
+    console.log("Privileges: " + emp.privileges);
+  }
+  if ("startDate" in emp) {
+    console.log("StartDate: " + emp.startDate);
   }
 }
 
-// type Person = {
-//   name: string;
-//   age: number;
+printEmployeeInformation({ name: "Manu", startDate: new Date() });
 
-//   greet(phrase: string): void;
-// };
+class Car {
+  drive() {
+    console.log("Driving...");
+  }
+}
 
-let user1: Greetable;
-// user1 = {
-//   name: "Max",
-//   age: 30,
-//   greet(phrase: string) {
-//     console.log(phrase);
-//   },
-// };
+class Truck {
+  drive() {
+    console.log("Track is driving...");
+  }
 
-// user1.greet("Hello I am");
+  loadCargo(amount: number) {
+    console.log("There is any goods on Track...", amount);
+  }
+}
 
-user1 = new Person("Max");
-user1.greet("Hello I am");
-console.log(user1);
+type Vehicle = Car | Truck;
+
+const v1 = new Car();
+const v2 = new Truck();
+
+function useVehicle(vehicle: Vehicle) {
+  vehicle.drive();
+  if ("loadCargo" in vehicle) {
+    vehicle.loadCargo(100);
+  }
+  if (vehicle instanceof Truck) {
+    vehicle.loadCargo(1000);
+  }
+}
+
+useVehicle(v1);
+useVehicle(v2);
