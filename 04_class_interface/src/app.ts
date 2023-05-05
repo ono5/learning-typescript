@@ -58,6 +58,12 @@ const fetchedUserData = {
 // Optional Chain
 console.log(fetchedUserData?.job?.title);
 
+const userInput = null;
+// null or undefined
+const storedData = userInput ?? "DEFAULT";
+// const storedData = userInput || "DEFAULT";
+console.log(storedData);
+
 // type UnknownEmployee = Employee | Admin;
 // function printEmployeeInformation(emp: UnknownEmployee) {
 //   console.log(emp.name);
