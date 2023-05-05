@@ -45,6 +45,19 @@ function add2(a: Combinable, b: Combinable) {
 const result = add2("Hello", "TypeScript");
 result.split(" ");
 
+const fetchedUserData = {
+  id: "u1",
+  name: "user1",
+  job: {
+    title: "Developer",
+    description: "TypeScript",
+  },
+};
+
+// console.log(fetchedUserData.job && fetchedUserData.job.title);
+// Optional Chain
+console.log(fetchedUserData?.job?.title);
+
 // type UnknownEmployee = Employee | Admin;
 // function printEmployeeInformation(emp: UnknownEmployee) {
 //   console.log(emp.name);
@@ -132,7 +145,7 @@ result.split(" ");
 // ) as HTMLInputElement;
 
 // pattern3
-const userInputElement = document.getElementById("user-input");
+// const userInputElement = document.getElementById("user-input");
 // if (userInputElement) {
 //   (userInputElement as HTMLInputElement).value = "Hello";
 // }
