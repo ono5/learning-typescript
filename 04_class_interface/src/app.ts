@@ -82,3 +82,38 @@ const numberStorage = new DataStorage<number>();
 // objStorage.addItem({ name: "Manu" });
 // objStorage.removeItem({ name: "Manu" });
 // console.log(objStorage.getItems());
+
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+// function createCourseGoal(
+//   title: string,
+//   description: string,
+//   date: Date
+// ): CourseGoal {
+//   return {
+//     title: title,
+//     description: description,
+//     completeUntil: date,
+//   };
+// }
+function createCourseGoal(
+  title: string,
+  description: string,
+  date: Date
+): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+  return courseGoal as CourseGoal;
+}
+
+// Readonly value
+const names: Readonly<string[]> = ["Max", "Anna"];
+// names.push("Manu");
+// names.pop();
+// https://www.typescriptlang.org/docs/handbook/utility-types.html
