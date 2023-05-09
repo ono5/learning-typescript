@@ -36,3 +36,20 @@ Person = __decorate([
 ], Person);
 const pers = new Person();
 console.log(pers);
+class Product {
+    set price(val) {
+        if (val > 0) {
+            this._price = val;
+        }
+        else {
+            throw new Error("Unvariable Value - Cannot set up values under 0.");
+        }
+    }
+    constructor(t, p) {
+        this.title = t;
+        this._price = p;
+    }
+    getPriceWithTax(tax) {
+        return this._price + (1 + tax);
+    }
+}
