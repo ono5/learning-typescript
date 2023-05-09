@@ -6,14 +6,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 function Logger(logString) {
+    console.log("LOGGER Factory");
     return function (constructor) {
         console.log(logString);
         console.log(constructor);
     };
 }
 function withTemplate(template, hookId) {
+    console.log("TEMPLATE Factory");
     return function (constructor) {
         const hookEl = document.getElementById(hookId);
+        console.log("Show template!");
         const p = new constructor();
         if (hookEl) {
             hookEl.innerHTML = template;
@@ -28,6 +31,7 @@ let Person = class Person {
     }
 };
 Person = __decorate([
+    Logger("Outputting Log - Person"),
     withTemplate("<h1>Person Object</h1>", "app")
 ], Person);
 const pers = new Person();
