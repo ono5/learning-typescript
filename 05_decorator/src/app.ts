@@ -8,14 +8,20 @@ function Logger(logString: string) {
 
 function withTemplate(template: string, hookId: string) {
   console.log("TEMPLATE Factory");
-  return function (constructor: any) {
+  return function <T extends { new (...args: any[]): { name: string } }>(
+    originalconstructor: T
+  ) {
     const hookEl = document.getElementById(hookId);
-    console.log("Show template!");
-    const p = new constructor();
-    if (hookEl) {
-      hookEl.innerHTML = template;
-      hookEl.querySelector("h1")!.textContent = p.name;
-    }
+    return class extends originalconstructor {
+      constructor(..._: any[]) {
+        super();
+        console.log("Show template!");
+        if (hookEl) {
+          hookEl.innerHTML = template;
+          hookEl.querySelector("h1")!.textContent = this.name;
+        }
+      }
+    };
   };
 }
 
@@ -90,3 +96,6 @@ class Product {
     return this._price + (1 + tax);
   }
 }
+
+const p1 = new Product("Book", 100);
+const p2 = new Product("Book2", 200);
