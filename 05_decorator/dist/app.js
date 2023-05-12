@@ -17,14 +17,18 @@ function Logger(logString) {
 }
 function withTemplate(template, hookId) {
     console.log("TEMPLATE Factory");
-    return function (constructor) {
+    return function (originalconstructor) {
         const hookEl = document.getElementById(hookId);
-        console.log("Show template!");
-        const p = new constructor();
-        if (hookEl) {
-            hookEl.innerHTML = template;
-            hookEl.querySelector("h1").textContent = p.name;
-        }
+        return class extends originalconstructor {
+            constructor(..._) {
+                super();
+                console.log("Show template!");
+                if (hookEl) {
+                    hookEl.innerHTML = template;
+                    hookEl.querySelector("h1").textContent = this.name;
+                }
+            }
+        };
     };
 }
 let Person = class Person {
@@ -89,3 +93,5 @@ __decorate([
     Log3,
     __param(0, Log4)
 ], Product.prototype, "getPriceWithTax", null);
+const p1 = new Product("Book", 100);
+const p2 = new Product("Book2", 200);
